@@ -5,8 +5,18 @@ import Footer from '../../../../partials/footer'
 import BreadCrumbs from '../../../../partials/BreadCrumbs'
 import { FaPlus } from 'react-icons/fa'
 import SettingsCategoryList from './SettingsCategoryList'
+import ModalAddSettingsCategory from './ModalAddSettingsCategory'
 
 const SettingsCategory = () => {
+
+  const [isModalCategory, setIsModalCategory] = React.useState(false);
+
+  const [itemEdit, setItemEdit] = React.useState(null);
+
+  console.log(isModalCategory);
+  
+
+
   return (
     <>
       <Header/>
@@ -17,7 +27,8 @@ const SettingsCategory = () => {
         <div className="flex items-center justify-between">
             <BreadCrumbs/>
 
-            <button type='button' className='flex items-center gap-x-1 text-primary hover:underline text-sm font-semibold'>
+            <button type='button' className='flex items-center gap-x-1 text-primary hover:underline text-sm font-semibold'
+            onClick={() => setIsModalCategory(true)}>
                 <FaPlus/>
                 <span>Add</span>
             </button>
@@ -39,6 +50,11 @@ const SettingsCategory = () => {
         <Footer/>
 
       </div>
+
+      {isModalCategory && 
+      <ModalAddSettingsCategory 
+      itemEdit={itemEdit}
+      setIsModal = {setIsModalCategory} />}
     </>
   )
 }
