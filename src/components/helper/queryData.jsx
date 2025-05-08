@@ -1,4 +1,6 @@
-export const queryDATA = (endpoint, method = 'get', fd = {}) => {
+import { devApiUrl, devKey } from "./function-general";
+
+export const queryData = (endpoint, method = 'get', fd = {}) => {
     let url = devApiUrl + endpoint;
     let username = devKey;
     let password = '';

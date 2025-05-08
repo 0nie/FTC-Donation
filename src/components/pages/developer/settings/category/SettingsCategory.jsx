@@ -14,6 +14,11 @@ const SettingsCategory = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   console.log(isModalCategory);
+
+  const handleAdd = () => {
+    setItemEdit(null);
+    setIsModalCategory(true);
+  }
   
 
 
@@ -28,7 +33,7 @@ const SettingsCategory = () => {
             <BreadCrumbs/>
 
             <button type='button' className='flex items-center gap-x-1 text-primary hover:underline text-sm font-semibold'
-            onClick={() => setIsModalCategory(true)}>
+            onClick={handleAdd}>
                 <FaPlus/>
                 <span>Add</span>
             </button>
@@ -41,7 +46,9 @@ const SettingsCategory = () => {
             <h2 className='text-base pt-3'>Category</h2>
 
             <div  className='pt-3'>
-                <SettingsCategoryList/>
+                <SettingsCategoryList setItemEdit={setItemEdit}
+                  setIsModal={setIsModalCategory}
+                />
             </div>
             
         </div>

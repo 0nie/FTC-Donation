@@ -5,8 +5,13 @@ import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import { InputText, InputTextArea } from '../../../../custom-hooks/FormInputs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { queryData } from '../../../../helper/queryData';
+import { StoreContext } from '../../../../../../store/StoreContext';
+import { setError, setMessage, setSuccess } from '../../../../../../store/StoreAction';
 
 const ModalAddSettingsCategory = ({itemEdit, setIsModal}) => {
+
+    const {store, dispatch} = React.useContext(StoreContext);
 
     const [animate, setAnimate] = React.useState("translate-x-full");
     const queryClient = useQueryClient();
@@ -14,7 +19,7 @@ const ModalAddSettingsCategory = ({itemEdit, setIsModal}) => {
         mutationFn: (values) => 
         queryData(
         itemEdit ? 
-        `` : 
+        `/rest/v1/controllers/developer/settings/category/category.php?categoryid=${itemEdit.category_aid}` : 
         `/rest/v1/controllers/developer/settings/category/category.php`,
         itemEdit ? "put" : "post",
         values),
@@ -24,14 +29,20 @@ const ModalAddSettingsCategory = ({itemEdit, setIsModal}) => {
 
         if (!data.success) {
             console.log("error");
+            dispatch(setError(true));
+            dispatch(setMessage(data.error));
         } else{
-            console.log("save");
+          setIsModal(false);
+          dispatch(setSuccess(true));
+          dispatch(setMessage(`Successfully ${itemEdit ? "updated" : "added"}.`));
+          console.log("save");
         }
     },
 
     });
     const initVal = {
-        category_name : "",
+        category_name : itemEdit ? itemEdit.category_name : "",
+        category_description : itemEdit ? itemEdit.category_description : "",
     };
     const yupSchema = Yup.object({
         category_name: Yup.string().required("required"),
@@ -77,7 +88,7 @@ const ModalAddSettingsCategory = ({itemEdit, setIsModal}) => {
                           label="Name"
                           type="text"
                           name="category_name"
-                          disable={"false"}
+                          disable="false"
                         />
                       </div>
                     <div className="relative mt-3 mb-5">
@@ -85,7 +96,7 @@ const ModalAddSettingsCategory = ({itemEdit, setIsModal}) => {
                           label="Description"
                           type="text"
                           name="category_description"
-                          disable={false}
+                          disable="false"
                         />
                       </div>
                       

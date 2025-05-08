@@ -41,7 +41,7 @@ export const InputText = ({
 export const InputTextArea = ({
   label = "",
   required = true,
-  className = true,
+  className = "",
   onChange = null,
   refVal = null,
   ...props

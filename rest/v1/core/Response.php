@@ -12,14 +12,17 @@ class Response
     {
         $this->_success = $success;
     }
+
     public function setData($data)
     {
         $this->_data = $data;
     }
+
     public function setStatusCode($statusCode)
     {
         $this->_statusCode = $statusCode;
     }
+
     public function toCache($toCache)
     {
         $this->_toCache = $toCache;
@@ -34,6 +37,7 @@ class Response
         } else {
             header("Cache-Control: no-cache, no-store");
         }
+
         if ($this->_success == false) {
             $this->_responseData = $this->_data;
         } else {
