@@ -1,23 +1,20 @@
 import React from "react";
 import { StoreContext } from "../../../../store/StoreContext";
+import { setError } from "../../../../store/StoreAction";
 
-const ModalSuccess = () => {
+const ModalError = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("-translate-y-60");
 
   const handleClose = () => {
     setAnimate("-translate-y-60"); //CLOSE ANIMATION
     setTimeout(() => {
-      dispatch(setSuccess(false)); //CLOSE SUCCESS TOAST
+      dispatch(setError(false)); //CLOSE SUCCESS TOAST
     }, 200);
   };
 
   React.useEffect(() => {
     setAnimate("");
-
-    setTimeout(() => {
-      handleClose();
-    }, 3000);
   }, []);
 
   return (
@@ -25,7 +22,7 @@ const ModalSuccess = () => {
       <div
         className={`fixed z-[99] top-10 left-1/2 -translate-x-1/2 flex items-start w-full max-w-sm p-4 mb-4 text-dark bg-white rounded-lg shadow-custom transform duration-200 ease-in-out ${animate}`}
       >
-        <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg ">
+        <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-100 bg-orange-500 rounded-lg ">
           <svg
             className="w-5 h-5"
             aria-hidden="true"
@@ -33,9 +30,9 @@ const ModalSuccess = () => {
             fill="currentColor"
             viewBox="0 0 20 20"
           >
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
           </svg>
-          <span className="sr-only">Check icon</span>
+          <span className="sr-only">Warning icon</span>
         </div>
         <div className="ms-3 text-sm font-normal">{store.message}</div>
         <button
@@ -66,4 +63,4 @@ const ModalSuccess = () => {
   );
 };
 
-export default ModalSuccess;
+export default ModalError;

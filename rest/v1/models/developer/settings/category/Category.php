@@ -107,4 +107,24 @@ class Category
         }
         return $query;
     }
+
+    public function active()
+    {
+        try {
+            $sql = "update {$this->tblCategory} set ";
+            $sql .= "category_is_active = :category_is_active, ";
+            $sql .= "category_updated = :category_updated, ";
+            $sql .= "where category_aid = :category_aid ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "category_is_active" => $this->category_is_active,
+                "category_updated" => $this->category_updated,
+                "category_aid" => $this->category_aid,
+
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
 }

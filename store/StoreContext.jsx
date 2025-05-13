@@ -5,6 +5,9 @@ const initVal = {
     error: false,
     success : false,
     message: "",
+    archive: false,
+    restore: false, 
+    delete: false,
 };
 
 const StoreContext = React.createContext();

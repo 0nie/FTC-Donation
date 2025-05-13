@@ -18,3 +18,24 @@ export const setMessage = (val) => {
     payload: val,
   };
 };
+
+export const setArchive = (val) => {
+  return {
+    type: "ARCHIVE",
+    payload: val,
+  };
+};
+
+export const setRestore = (val) => {
+  return {
+    type: "RESTORE",
+    payload: val,
+  };
+};
+
+export const setDelete = (val) => {
+  return {
+    type: "DELETE",
+    payload: val,
+  };
+};
