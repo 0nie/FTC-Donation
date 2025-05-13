@@ -6,11 +6,12 @@ import {
   setArchive,
   setError,
   setMessage,
+  setRestore,
   setSuccess,
 } from "../../../../store/StoreAction";
 import { FaQuestion } from "react-icons/fa";
 
-const ModalArchive = ({ endpoint, msg, successMsg, queryKey }) => {
+const ModalRestore = ({ endpoint, msg, successMsg, queryKey }) => {
   const { dispatch } = React.useContext(StoreContext);
 
   const queryClient = useQueryClient();
@@ -35,11 +36,11 @@ const ModalArchive = ({ endpoint, msg, successMsg, queryKey }) => {
 
   const handleConfirm = async () => {
     //MUTATE OR SEND REQUEST UPON CLICK
-    mutation.mutate({ isActive: 0 });
+    mutation.mutate({ isActive: 1 });
   };
 
   const handleClose = () => {
-    dispatch(setArchive(false));
+    dispatch(setRestore(false));
   };
 
   return (
@@ -47,7 +48,7 @@ const ModalArchive = ({ endpoint, msg, successMsg, queryKey }) => {
       <div className="bg-dark/50 overflow-y-auto fixed top-0 right-0 bottom-0 left-0 z-50 flex justify-center items-center">
         <div className="p-1 w-[350px]">
           <div className="bg-white p-6 pt-10 text-center rounded-lg">
-            <FaQuestion className="mx-auto my-2 animate-bounce h-11 w-11 text-red-600 " />
+            <FaQuestion className="mx-auto my-2 animate-bounce h-11 w-11 text-red-600" />
             <p className="text-sm pt-3 pb-5">{msg}</p>
             <div className="flex items-center gap-1">
               <button
@@ -75,4 +76,4 @@ const ModalArchive = ({ endpoint, msg, successMsg, queryKey }) => {
   );
 };
 
-export default ModalArchive;
+export default ModalRestore;

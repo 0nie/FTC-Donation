@@ -1,33 +1,29 @@
 import React from "react";
 import Header from "../../../../partials/Header";
 import Navigation from "../Navigation";
-import Footer from "../../../../partials/Footer";
+import Footer from "../../../../partials/Footer"; // Make sure capitalization matches your actual file
 import BreadCrumbs from "../../../../partials/BreadCrumbs";
 import { FaPlus } from "react-icons/fa";
-import SettingsCategoryList from "./SettingsCategoryList";
-import ModalAddSettingsCategory from "./ModalAddSettingsCategory";
+import ModalAddSettingsDesignation from "./ModalAddSettingsDesignation";
+import SettingsDesignationList from "./SettingsDesignationList";
 
-const SettingsCategory = () => {
-  const [isModalCategory, setIsModalCategory] = React.useState(false);
-
+const SettingsDesignation = () => {
+  const [isModalDesignation, setIsModalDesignation] = React.useState(false);
   const [itemEdit, setItemEdit] = React.useState(null);
 
-  console.log(isModalCategory);
-
   const handleAdd = () => {
-    setItemEdit(null);
-    setIsModalCategory(true);
+    setItemEdit(null); // Clear any edit state
+    setIsModalDesignation(true); // Open modal for "add"
   };
 
   return (
     <>
       <Header />
-      <Navigation menu="settings" subMenu="category" />
+      <Navigation menu="settings" subMenu="designation" />
       <div className="wrapper">
         {/* BREADCRUMBS OR ADD BUTTON */}
         <div className="flex items-center justify-between">
           <BreadCrumbs />
-
           <button
             type="button"
             className="flex items-center gap-x-1 text-primary hover:underline text-sm font-semibold"
@@ -38,14 +34,13 @@ const SettingsCategory = () => {
           </button>
         </div>
 
-        {/* CONTENT */}
-        <div className="pb-8 ">
-          <h2 className="text-base pt-3">Category</h2>
-
+        {/* MAIN CONTENT */}
+        <div className="pb-8">
+          <h2 className="text-base pt-3">Designation</h2>
           <div className="pt-3">
-            <SettingsCategoryList
+            <SettingsDesignationList
               setItemEdit={setItemEdit}
-              setIsModal={setIsModalCategory}
+              setIsModal={setIsModalDesignation}
             />
           </div>
         </div>
@@ -54,14 +49,15 @@ const SettingsCategory = () => {
         <Footer />
       </div>
 
-      {isModalCategory && (
-        <ModalAddSettingsCategory
+      {/* MODAL */}
+      {isModalDesignation && (
+        <ModalAddSettingsDesignation
           itemEdit={itemEdit}
-          setIsModal={setIsModalCategory}
+          setIsModal={setIsModalDesignation}
         />
       )}
     </>
   );
 };
 
-export default SettingsCategory;
+export default SettingsDesignation;

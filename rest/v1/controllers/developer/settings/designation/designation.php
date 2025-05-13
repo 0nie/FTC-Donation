@@ -4,7 +4,7 @@ require '../../../../core/header.php';
 // use needed function
 require '../../../../core/functions.php';
 // use needed models
-require '../../../../models/developer/settings/category/Category.php';
+require '../../../../models/developer/settings/designation/designation.php';
 $body = file_get_contents("php://input");
 $data = json_decode($body, true);
 

@@ -10,7 +10,7 @@ const Header = () => {
   console.log(store.message, store.error, store.success);
   return (
     <>
-      <div className="flex items-center justify-between h-16 border-solid border-b-2 border-black px-2">
+      <div className="sticky top-0 z-20 flex items-center justify-between h-16 border-solid border-b-2 bg-white border-black px-2">
         <div className="">
           <FtcLogoHeader />
         </div>

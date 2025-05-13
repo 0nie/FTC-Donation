@@ -13,7 +13,7 @@ import {
   setSuccess,
 } from "../../../../../../store/StoreAction";
 
-const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
+const ModalAddSettingsDesignation = ({ itemEdit, setIsModal }) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const [animate, setAnimate] = React.useState("translate-x-full");
@@ -22,14 +22,14 @@ const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
     mutationFn: (values) =>
       queryData(
         itemEdit
-          ? `/rest/v1/controllers/developer/settings/category/category.php?categoryid=${itemEdit.category_aid}`
-          : `/rest/v1/controllers/developer/settings/category/category.php`,
+          ? `/rest/v1/controllers/developer/settings/designation/designation.php?designationid=${itemEdit.designation_aid}`
+          : `/rest/v1/controllers/developer/settings/designation/designation.php`,
         itemEdit ? "put" : "post",
         values
       ),
 
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ query: ["category"] });
+      queryClient.invalidateQueries({ query: ["designation"] });
 
       if (!data.success) {
         console.log("error");
@@ -44,10 +44,10 @@ const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
     },
   });
   const initVal = {
-    category_name: itemEdit ? itemEdit.category_name : "",
+    designation_name: itemEdit ? itemEdit.designation_name : "",
   };
   const yupSchema = Yup.object({
-    category_name: Yup.string().required("required"),
+    designation_name: Yup.string().required("required"),
   });
 
   const handleClose = () => {
@@ -64,7 +64,7 @@ const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
     <>
       <ModalWrapperSide handleClose={handleClose} className={`${animate}`}>
         <div className="modal__header">
-          <h3>{itemEdit ? "Update" : "Add"} Category</h3>
+          <h3>{itemEdit ? "Update" : "Add"} designation</h3>
           <button
             type="button"
             className="absolute top-0 right-0"
@@ -92,7 +92,7 @@ const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
                         <InputText
                           label="Name"
                           type="text"
-                          name="category_name"
+                          name="designation_name"
                           disable="false"
                         />
                       </div>
@@ -124,4 +124,4 @@ const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
   );
 };
 
-export default ModalAddSettingsCategory;
+export default ModalAddSettingsDesignation;

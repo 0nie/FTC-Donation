@@ -18,19 +18,19 @@ export const StoreReducer = (state, action) => {
         message: action.payload,
       };
 
-      case "ARCHIVE":
+    case "ARCHIVE":
       return {
         ...state,
         archive: action.payload,
       };
 
-      case "RESTORE":
+    case "RESTORE":
       return {
         ...state,
         restore: action.payload,
       };
-      
-      case "DELETE":
+
+    case "DELETE":
       return {
         ...state,
         delete: action.payload,

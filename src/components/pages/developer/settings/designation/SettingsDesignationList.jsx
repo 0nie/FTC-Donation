@@ -22,7 +22,7 @@ import ModalArchive from "../../../../partials/modal/ModalArchive";
 import ModalRestore from "../../../../partials/modal/ModalRestore";
 import ModalDelete from "../../../../partials/modal/ModalDelete";
 
-const SettingsCategoryList = ({ setItemEdit, setIsModal }) => {
+const SettingsDesignationList = ({ setItemEdit, setIsModal }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setId] = React.useState(null);
   const [dataItem, setDataItem] = React.useState(null);
@@ -32,17 +32,15 @@ const SettingsCategoryList = ({ setItemEdit, setIsModal }) => {
     isLoading, //INITIAL LOADING
     isFetching, //WHEN PAGE IS LOADED DATA IS TO REFETCH
     error, //REQUEST IS ERROR
-    data: category, //THE DATA IS STORED IN VARIABLE CATEGORY
+    data: designation, //THE DATA IS STORED IN VARIABLE DESIGNATION
   } = useQueryData(
-    `/rest/v1/controllers/developer/settings/category/category.php`, //REQUEST API URL
+    `/rest/v1/controllers/developer/settings/designation/designation.php`, //REQUEST API URL
     "get", //METHOD REQUEST
-    "category", // KEY FOR REFETCHING
+    "designation", // KEY FOR REFETCHING
     {}, // PAYLOAD
     null, // ID
     true // FOR REFETCHING
   );
-
-  console.log(category);
 
   const handleEdit = (item) => {
     setItemEdit(item);
@@ -51,19 +49,19 @@ const SettingsCategoryList = ({ setItemEdit, setIsModal }) => {
 
   const handleArchive = (item) => {
     setDataItem(item);
-    setId(item.category_aid);
+    setId(item.designation_aid);
     dispatch(setArchive(true));
   };
 
   const handleRestore = (item) => {
     setDataItem(item);
-    setId(item.category_aid);
+    setId(item.designation_aid);
     dispatch(setRestore(true));
   };
 
   const handleDelete = (item) => {
     setDataItem(item);
-    setId(item.category_aid);
+    setId(item.designation_aid);
     dispatch(setDelete(true));
   };
 
@@ -86,7 +84,7 @@ const SettingsCategoryList = ({ setItemEdit, setIsModal }) => {
                 <th className="w-[3rem] text-center">#</th>
                 <th className="w-[3rem]">Status</th>
                 <th className="w-[15rem]">Name</th>
-                <th className="w-[15rem]">Description</th>
+
                 <th className="flex gap-x-3 items-center justify-end mr-2">
                   ACTIONS
                 </th>
@@ -112,7 +110,7 @@ const SettingsCategoryList = ({ setItemEdit, setIsModal }) => {
                 </>
               )}
               {/* IF DATA HAS NO COUNT */}
-              {category?.count == 0 && (
+              {designation?.count == 0 && (
                 <>
                   <tr className="text-center">
                     <td colSpan="100%">
@@ -122,24 +120,22 @@ const SettingsCategoryList = ({ setItemEdit, setIsModal }) => {
                 </>
               )}
               {/* IF DATA HAS COUNT */}
-              {category?.count > 0 &&
-                category.data.map((item, key) => {
+              {designation?.count > 0 &&
+                designation.data.map((item, key) => {
                   return (
                     <tr className="group relative" key={key}>
                       <td>{count++}.</td>
                       <td>
-                        {item.category_is_active == 1 ? (
+                        {item.designation_is_active == 1 ? (
                           <span className="text-green-600">Active</span>
                         ) : (
                           <span className="text-gray-600">Inactive</span>
                         )}
                       </td>
-                      <td>{item.category_name}</td>
-                      <td className="max-w-[6rem] truncate">
-                        {item.category_description}
-                      </td>
+                      <td>{item.designation_name}</td>
+
                       <td colSpan="100%">
-                        {item.category_is_active == 1 ? (
+                        {item.designation_is_active == 1 ? (
                           <>
                             <div className="flex gap-x-3 items-center justify-end mr-2">
                               <button
@@ -194,33 +190,33 @@ const SettingsCategoryList = ({ setItemEdit, setIsModal }) => {
       </div>
       {store.archive && (
         <ModalArchive
-          endpoint={`/rest/v1/controllers/developer/settings/category/active.php?categoryid=${id}`}
+          endpoint={`/rest/v1/controllers/developer/settings/designation/active.php?designationid=${id}`}
           msg={"Are you sure you want to archive this record?"}
           successMsg={`Successfully Archive`}
-          queryKey={"category"}
+          queryKey={"designation"}
         />
       )}
 
       {store.restore && (
         <ModalRestore
-          endpoint={`/rest/v1/controllers/developer/settings/category/active.php?categoryid=${id}`}
+          endpoint={`/rest/v1/controllers/developer/settings/designation/active.php?designationid=${id}`}
           msg={"Are you sure you want to restore this record?"}
           successMsg={`Successfully Restore`}
-          queryKey={"category"}
+          queryKey={"designation"}
         />
       )}
 
       {store.delete && (
         <ModalDelete
-          endpoint={`/rest/v1/controllers/developer/settings/category/category.php?categoryid=${id}`}
+          endpoint={`/rest/v1/controllers/developer/settings/designation/designation.php?designationid=${id}`}
           msg={"Are you sure you want to delete this record?"}
           successMsg={`Successfully Delete`}
-          item={dataItem.category_name}
-          queryKey={"category"}
+          item={dataItem.designation_name}
+          queryKey={"designation"}
         />
       )}
     </>
   );
 };
 
-export default SettingsCategoryList;
+export default SettingsDesignationList;
