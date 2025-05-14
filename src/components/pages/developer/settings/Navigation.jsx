@@ -63,9 +63,9 @@ const Navigation = ({ menu = "", subMenu = "" }) => {
                               >
                                 <Link
                                   to={subItem.link}
-                                  className={`border-l-2 pl-3 hover:border-accent ${
+                                  className={`border-l-2 pl-3 hover:border-accent  ${
                                     subMenu === subItem.code
-                                      ? "border-accent"
+                                      ? "border-accent text-accent"
                                       : "border-transparent"
                                   }`}
                                 >
