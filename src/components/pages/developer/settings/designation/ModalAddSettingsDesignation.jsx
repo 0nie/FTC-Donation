@@ -3,7 +3,11 @@ import ModalWrapperSide from "../../../../partials/modal/ModalWrapperSide";
 import { FaTimesCircle } from "react-icons/fa";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
-import { InputText, InputTextArea } from "../../../../custom-hooks/FormInputs";
+import {
+  InputSelect,
+  InputText,
+  InputTextArea,
+} from "../../../../custom-hooks/FormInputs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryData } from "../../../../helper/queryData";
 import { StoreContext } from "../../../../../../store/StoreContext";
@@ -12,12 +16,35 @@ import {
   setMessage,
   setSuccess,
 } from "../../../../../../store/StoreAction";
+import useQueryData from "../../../../helper/useQueryData";
 
 const ModalAddSettingsDesignation = ({ itemEdit, setIsModal }) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const [animate, setAnimate] = React.useState("translate-x-full");
+
+  const {
+    isLoading, //INITIAL LOADING
+    isFetching, //WHEN PAGE IS LOADED DATA IS TO REFETCH
+    error, //REQUEST IS ERROR
+    data: category, //THE DATA IS STORED IN VARIABLE CATEGORY
+  } = useQueryData(
+    `/rest/v1/controllers/developer/settings/category/category.php`, //REQUEST API URL
+    "get", //METHOD REQUEST
+    "category", // KEY FOR REFETCHING
+    {}, // PAYLOAD
+    null, // ID
+    true // FOR REFETCHING
+  );
+
+  const filterActiveCategory = category?.data.filter(
+    (item) =>
+      item.category_is_active == 1 ||
+      (itemEdit && itemEdit.designation_category_id == item.category_aid)
+  );
+
   const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: (values) =>
       queryData(
@@ -45,9 +72,11 @@ const ModalAddSettingsDesignation = ({ itemEdit, setIsModal }) => {
   });
   const initVal = {
     designation_name: itemEdit ? itemEdit.designation_name : "",
+    designation_category_id: itemEdit ? itemEdit.designation_category_id : "",
   };
   const yupSchema = Yup.object({
     designation_name: Yup.string().required("required"),
+    designation_category_id: Yup.string().required("required"),
   });
 
   const handleClose = () => {
@@ -84,6 +113,7 @@ const ModalAddSettingsDesignation = ({ itemEdit, setIsModal }) => {
             }}
           >
             {(props) => {
+              console.log(props.values);
               return (
                 <Form>
                   <div className="forms_wrapper">
@@ -93,8 +123,47 @@ const ModalAddSettingsDesignation = ({ itemEdit, setIsModal }) => {
                           label="Name"
                           type="text"
                           name="designation_name"
-                          disable="false"
+                          disabled={false}
                         />
+                      </div>
+                      <div className="relative mt-3 mb-5">
+                        <InputSelect
+                          label="Category"
+                          type="text"
+                          name="designation_category_id"
+                          onChange={(e) => e}
+                          disabled={mutation.isPending}
+                        >
+                          <optgroup label="Select a category">
+                            {isLoading || isFetching ? (
+                              <option disabled value="">
+                                Loading...
+                              </option>
+                            ) : error ? (
+                              <option disabled value="">
+                                Server Error
+                              </option>
+                            ) : filterActiveCategory?.length == 0 ? (
+                              <option disabled value="">
+                                No Data
+                              </option>
+                            ) : (
+                              <>
+                                <option value="" hidden></option>
+                                {filterActiveCategory.map((item, index) => {
+                                  return (
+                                    <option
+                                      key={index}
+                                      value={item.category_aid}
+                                    >
+                                      {item.category_name}
+                                    </option>
+                                  );
+                                })}
+                              </>
+                            )}
+                          </optgroup>
+                        </InputSelect>
                       </div>
                     </div>
                     <div className="actions">

@@ -11,7 +11,7 @@ import TableLoading from "../../../../partials/spinners/TableLoading";
 import ServerError from "../../../../partials/ServerError";
 import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
 import useQueryData from "../../../../helper/useQueryData";
-import Nodata from "../../../../partials/spinners/Nodata";
+import Nodata from "../../../../partials/NoData";
 import { StoreContext } from "../../../../../../store/StoreContext";
 import {
   setArchive,

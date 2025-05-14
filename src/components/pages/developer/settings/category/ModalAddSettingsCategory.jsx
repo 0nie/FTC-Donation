@@ -45,9 +45,13 @@ const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
   });
   const initVal = {
     category_name: itemEdit ? itemEdit.category_name : "",
+    category_description: itemEdit ? itemEdit.category_description : "",
+
+    category_name_old: itemEdit ? itemEdit.category_name : "",
   };
   const yupSchema = Yup.object({
     category_name: Yup.string().required("required"),
+    category_description: Yup.string().required("required"),
   });
 
   const handleClose = () => {
@@ -93,7 +97,15 @@ const ModalAddSettingsCategory = ({ itemEdit, setIsModal }) => {
                           label="Name"
                           type="text"
                           name="category_name"
-                          disable="false"
+                          disabled={false}
+                        />
+                      </div>
+                      <div className="relative mt-3 mb-5">
+                        <InputTextArea
+                          label="Description"
+                          type="text"
+                          name="category_description"
+                          disabled={false}
                         />
                       </div>
                     </div>

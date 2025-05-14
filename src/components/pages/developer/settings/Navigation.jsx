@@ -55,10 +55,10 @@ const Navigation = ({ menu = "", subMenu = "" }) => {
                       {((item.code === "reports" && isReports) ||
                         (item.code === "settings" && isSettings)) && (
                         <>
-                          {item.subMenu.map((subItem) => {
+                          {item.subMenu.map((subItem, index) => {
                             return (
                               <li
-                                key={subItem.code}
+                                key={index}
                                 className="cursor-pointer pl-10 my-0.5"
                               >
                                 <Link

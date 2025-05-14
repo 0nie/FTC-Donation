@@ -19,5 +19,8 @@ $category->category_is_active = 1;
 $category->category_created = date("Y-m-d H:i:s");
 $category->category_updated = date("Y-m-d H:i:s");
 
+//VALIDATION
+isNameExist($category, $category->category_name);
+
 $query = checkCreate($category);
 returnSuccess($category, 'category create', $query);
