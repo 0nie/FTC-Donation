@@ -287,6 +287,23 @@ function compareName(
     }
 }
 
+function isEmailExist($object, $email)
+{
+    $query = $object->checkEmail();
+    $count = $query->rowCount();
+    checkExistence($count, "{$email} already exist");
+}
+
+function compareEmail(
+    $object, // MODELS || parameter 1
+    $new_email, // pass the new name || parameter 2 
+    $old_email // pass the old name || parameter 3
+) {
+    if (strtolower($new_email) != strtolower($old_email)) {
+        isEmailExist($object, $new_email);
+    }
+}
+
 function isAssociated($object)
 {
     $query = $object->checkAssociation();

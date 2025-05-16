@@ -39,3 +39,10 @@ export const setDelete = (val) => {
     payload: val,
   };
 };
+
+export const setIsSearch = (val) => {
+  return {
+    type: "IS_SEARCH",
+    payload: val,
+  };
+};

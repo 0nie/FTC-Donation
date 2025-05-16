@@ -22,5 +22,6 @@ $category->category_updated = date("Y-m-d H:i:s");
 //VALIDATION
 isNameExist($category, $category->category_name);
 
+
 $query = checkCreate($category);
 returnSuccess($category, 'category create', $query);

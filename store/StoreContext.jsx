@@ -8,6 +8,7 @@ const initVal = {
   archive: false,
   restore: false,
   delete: false,
+  isSearch: false,
 };
 
 const StoreContext = React.createContext();
