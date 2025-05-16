@@ -129,7 +129,12 @@ const ChildrenListTable = ({ setItemEdit, setIsModal }) => {
           {/* COUNT OF DATA */}
           <div className="flex items-center gap-x-2">
             <FaList />
-            <span>0</span>
+            <span>
+              {result?.pages.reduce(
+                (total, page) => total + page.data.length,
+                0
+              ) ?? 0}
+            </span>
           </div>
         </div>
         <div className="relative">
