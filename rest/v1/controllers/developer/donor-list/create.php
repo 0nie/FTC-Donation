@@ -20,7 +20,7 @@ $donor->donor_list_is_active = 1;
 $donor->donor_list_created = date("Y-m-d H:i:s");
 $donor->donor_list_updated = date("Y-m-d H:i:s");
 
-isEmailExist($donor, $donor->donor_list_email);
+
 
 
 $query = checkCreate($donor);

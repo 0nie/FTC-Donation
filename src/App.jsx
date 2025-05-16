@@ -5,6 +5,7 @@ import { StoreProvider } from "../store/StoreContext";
 import SettingsDesignation from "./components/pages/developer/settings/designation/SettingsDesignation";
 import SettingsNotifications from "./components/pages/developer/settings/notifications/SettingsNotifications";
 import DonorList from "./components/pages/developer/donor-list/DonorList";
+import ChildrenList from "./components/pages/developer/children-list/ChildrenList";
 
 function App() {
   const queryClient = new QueryClient();
@@ -42,6 +43,8 @@ function App() {
                 path="/settings/notifications"
                 element={<SettingsNotifications />}
               />
+
+              <Route path="/children-list" element={<ChildrenList />} />
             </Routes>
           </Router>
         </StoreProvider>
