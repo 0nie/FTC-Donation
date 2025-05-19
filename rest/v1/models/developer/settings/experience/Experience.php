@@ -227,6 +227,7 @@ class Experience
         return $query;
     }
 
+
     public function update()
     {
         try {
@@ -234,19 +235,19 @@ class Experience
             $sql .= "experience_title = :experience_title, ";
             $sql .= "experience_description = :experience_description, ";
             $sql .= "experience_updated = :experience_updated ";
-            $sql .= "WHERE experience_aid = :experience_aid";
+            $sql .= "where experience_aid = :experience_aid ";
             $query = $this->connection->prepare($sql);
-            $success = $query->execute([
+            $query->execute([
                 "experience_title" => $this->experience_title,
                 "experience_description" => $this->experience_description,
-                "experience_updated" => date("Y-m-d H:i:s"),
+                "experience_updated" => $this->experience_updated,
                 "experience_aid" => $this->experience_aid,
             ]);
-            return $success;
         } catch (PDOException $ex) {
-            returnError($ex);
-            return false;
+
+            $query = false;
         }
+        return $query;
     }
 
 
