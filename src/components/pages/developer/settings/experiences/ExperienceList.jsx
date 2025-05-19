@@ -1,31 +1,34 @@
 import React from "react";
-import Header from "../../../partials/Header";
-import Navigation from "../settings/Navigation";
-import BreadCrumbs from "../../../partials/BreadCrumbs";
-import { FaPlus } from "react-icons/fa";
-import Footer from "../../../partials/Footer";
-import ChildrenListTable from "./ChildrenListTable";
-import ModalAddSettingsChildren from "./ModalAddSettingsChildren";
-import * as Yup from "yup";
 
-const ChildrenList = () => {
+import { FaPlus } from "react-icons/fa";
+
+import * as Yup from "yup";
+import Header from "../../../../partials/Header";
+import Navigation from "../Navigation";
+
+import Footer from "../../../../partials/Footer";
+import ExperienceListTable from "./ExperiencesListTable";
+import BreadCrumbs from "../../../../partials/BreadCrumbs";
+import ModalAddSettingsExperience from "./ModalAddSettingsExperiences";
+
+const ExperienceList = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
-  const [isModalChildren, setIsModalChildren] = React.useState(false);
+  const [isModalExperience, setIsModalExperience] = React.useState(false);
 
   const handleAdd = () => {
     setItemEdit(null);
-    setIsModalChildren(true);
+    setIsModalExperience(true);
   };
 
-  const currentMenu = location.pathname.startsWith("/children")
-    ? "/children-list"
+  const currentMenu = location.pathname.startsWith("/experience")
+    ? "/experience-list"
     : "";
 
   return (
     <>
       <Header />
 
-      <Navigation menu="children" />
+      <Navigation menu="experience" />
 
       <div className="wrapper">
         {/*BREADCRUMBS OR ADD BUTTON*/}
@@ -45,11 +48,11 @@ const ChildrenList = () => {
 
         {/*CONTENT*/}
         <div className="pb-8">
-          <h2 className="text-base">Children</h2>
+          <h2 className="text-base">Experience</h2>
           <div className="pt-3">
-            <ChildrenListTable
+            <ExperienceListTable
               setItemEdit={setItemEdit}
-              setIsModal={setIsModalChildren}
+              setIsModal={setIsModalExperience}
             />
           </div>
         </div>
@@ -57,10 +60,10 @@ const ChildrenList = () => {
         {/*FOOTER*/}
         <Footer />
 
-        {isModalChildren && (
-          <ModalAddSettingsChildren
+        {isModalExperience && (
+          <ModalAddSettingsExperience
             itemEdit={itemEdit}
-            setIsModal={setIsModalChildren}
+            setIsModal={setIsModalExperience}
           />
         )}
       </div>
@@ -68,4 +71,4 @@ const ChildrenList = () => {
   );
 };
 
-export default ChildrenList;
+export default ExperienceList;

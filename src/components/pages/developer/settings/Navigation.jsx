@@ -28,7 +28,9 @@ const Navigation = ({ menu = "", subMenu = "" }) => {
                   <Link
                     to={item.isDropdown ? "" : item.link}
                     className={`w-full flex items-center px-2 py-1 justify-between gap-x-5 ${
-                      item.code === menu ? "bg-white/10" : "hover:bg-white/10"
+                      menu === item.code
+                        ? "bg-white/10 text-accent"
+                        : "hover:bg-white/10"
                     }`}
                   >
                     <span className="flex items-center gap-x-5">

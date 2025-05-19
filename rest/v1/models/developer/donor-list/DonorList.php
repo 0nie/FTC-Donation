@@ -147,7 +147,8 @@ class DonorList
             $sql .= "donor_list_updated ";
             $sql .= "from {$this->tblDonorList} ";
             $sql .= "where ";
-            $sql .= "donor_list_last_name like :donor_list_last_name ";
+            $sql .= "CONCAT(donor_list_last_name,' ',donor_list_first_name) like :fullname_lastname_first ";
+            $sql .= "or CONCAT(donor_list_first_name,' ',donor_list_last_name) like :fullname_firstname_first ";
             $sql .= "or donor_list_email like :donor_list_email ";
             $sql .= "order by ";
             $sql .= "donor_list_is_active desc, ";
@@ -158,10 +159,13 @@ class DonorList
             $query->execute([
                 // est
                 // test
-                'donor_list_last_name' => "%{$this->search}%",
+                'fullname_lastname_first' => "%{$this->search}%",
+                'fullname_firstname_first' => "%{$this->search}%",
                 'donor_list_email' => "%{$this->search}%"
             ]);
         } catch (PDOException $ex) {
+            returnError($ex);
+
             $query = false;
         }
         return $query;
@@ -318,6 +322,4 @@ class DonorList
         }
         return $query;
     }
-
-   
 }

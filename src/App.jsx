@@ -6,6 +6,8 @@ import SettingsDesignation from "./components/pages/developer/settings/designati
 import SettingsNotifications from "./components/pages/developer/settings/notifications/SettingsNotifications";
 import DonorList from "./components/pages/developer/donor-list/DonorList";
 import ChildrenList from "./components/pages/developer/children-list/ChildrenList";
+import ExperienceList from "./components/pages/developer/settings/experiences/ExperienceList";
+
 
 function App() {
   const queryClient = new QueryClient();
@@ -45,6 +47,11 @@ function App() {
               />
 
               <Route path="/children-list" element={<ChildrenList />} />
+
+              <Route
+                path="/settings/my-experience"
+                element={<ExperienceList />}
+              />
             </Routes>
           </Router>
         </StoreProvider>

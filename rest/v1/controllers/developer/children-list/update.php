@@ -1,34 +1,41 @@
 <?php
 
 //CHECK DATABASE CONNECTION
+
 $conn = null;
 $conn = checkDbConnection();
-// USE MODELS
-$children = new ChildrenList($conn);
+//USE MODELS
+$childrenList = new ChildrenList($conn);
 
 if (array_key_exists('childrenid', $_GET)) {
-    //CHECK DATA
+    // check data
     checkPayload($data);
-    //CHECKING DATA
-    $children->children_list_aid = $_GET['childrenid'];
-    $children->children_list_last_name = checkIndex($data, 'children_list_last_name');
-    $children->children_list_first_name = checkIndex($data, 'children_list_first_name');
-    $children->children_list_birthdate = $data['children_list_birthdate'];
+    // CHECKING DATA
+    $childrenList->children_list_aid = $_GET['childrenid'];
+    $childrenList->children_list_first_name = checkIndex($data, 'children_list_first_name');
+    $childrenList->children_list_last_name = checkIndex($data, 'children_list_last_name');
+    $childrenList->children_list_birthdate = checkIndex($data, 'children_list_birthdate');
 
-    $children->children_list_donation = checkIndex($data, 'children_list_donation');
-    $children->children_list_story = $data['children_list_story'];
-    $children->children_list_updated = date('Y-m-d H:i:s');
+    $childrenList->children_list_donation = $data['children_list_donation'];
+    $childrenList->children_list_story = $data['children_list_story'];
+    $childrenList->children_list_is_active = 1;
+    $childrenList->children_list_created = date("Y-m-d H:i:s");
+    $childrenList->children_list_updated = date("Y-m-d H:i:s");
 
-    //VALIDATION
-    checkId($children->children_list_aid);
+    $children_list_first_name_old = $data['children_list_first_name_old'];
+    $children_list_last_name_old = $data['children_list_last_name_old'];
+    $fullname_new = "{$childrenList->children_list_first_name} {$childrenList->children_list_last_name}";
+    $fullname_old = "{$children_list_first_name_old} {$children_list_last_name_old}";
 
+    // VALIDATION
+    checkId($childrenList->children_list_aid);
 
+    compareName($childrenList, $fullname_new, $fullname_old);
 
-
-
-    $query = checkUpdate($children);
-    returnSuccess($children, 'children update', $query);
+    $query = checkUpdate($childrenList);
+    returnSuccess($childrenList, 'children list update', $query);
 }
 
-// exist if not available
-checkEndpoint();
+// exit if not available
+
+checkEndPoint();

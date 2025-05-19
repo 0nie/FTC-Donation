@@ -20,6 +20,13 @@ $children->children_list_last_name = checkIndex($data, 'children_list_last_name'
 $children->children_list_birthdate = checkIndex($data, 'children_list_birthdate');
 $children->children_list_donation = checkIndex($data, 'children_list_donation');
 $children->children_list_story = $data['children_list_story'];
+$fullname = "{$children->children_list_first_name} {$children->children_list_last_name}";
+
+
+
+isNameExist($children, $fullname);
+
+
 
 // Auto-calculate age from birthdate
 $birthdate = new DateTime($children->children_list_birthdate);

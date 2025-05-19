@@ -192,7 +192,6 @@ class ChildrenList
             $sql .= "children_list_is_active = :children_list_is_active ";
             $sql .= "and ( ";
             $sql .= "children_list_last_name like :children_list_last_name ";
-
             $sql .= " ) ";
             $sql .= "order by ";
             $sql .= "children_list_is_active desc, ";
@@ -308,6 +307,26 @@ class ChildrenList
                 "children_list_updated" => $this->children_list_updated,
                 "children_list_aid" => $this->children_list_aid,
 
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    public function checkName()
+    {
+        try {
+            $sql = "SELECT ";
+            $sql .= "children_list_aid, ";
+            $sql .= "children_list_first_name, ";
+            $sql .= "children_list_last_name ";
+            $sql .= "FROM {$this->tblChildrenList} ";
+            $sql .= "WHERE CONCAT(children_list_first_name, ' ', children_list_last_name) = :fullname";
+
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                'fullname' => "{$this->children_list_first_name} {$this->children_list_last_name}"
             ]);
         } catch (PDOException $ex) {
             $query = false;

@@ -8,7 +8,7 @@ class Database
     {
         // localhost
         $host = 'localhost';
-        $dbname = 'viter_ftc_donation_v1';
+        $dbname = 'viter-ftc-portfolio-v1';
         $username = 'root';
         $password = '';
 

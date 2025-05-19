@@ -1,32 +1,52 @@
-import { FaCogs, FaHandHoldingHeart, FaList } from "react-icons/fa";
+import { BsPersonWorkspace } from "react-icons/bs";
+import {
+  FaCogs,
+  FaCommentDots,
+  FaHandHoldingHeart,
+  FaList,
+  FaUserCircle,
+} from "react-icons/fa";
 import { FaChildren } from "react-icons/fa6";
+import { GiBrain } from "react-icons/gi";
+import { MdDesignServices, MdSpaceDashboard } from "react-icons/md";
+import { SiAboutdotme, SiCountingworkspro } from "react-icons/si";
 
 export const developerNavigation = [
   {
-    name: "Donor",
-    code: "donor",
-    link: "/donor",
-    icon: <FaHandHoldingHeart />,
+    name: "dash board",
+    code: "dash-board",
+    link: "/dash-board",
+    icon: <MdSpaceDashboard />,
   },
   {
-    name: "Children List",
-    code: "/children-list",
-    link: "/children-list",
-    icon: <FaChildren />,
+    name: "about",
+    code: "/about",
+    link: "/about",
+    icon: <FaUserCircle />,
   },
   {
-    name: "Reports",
-    code: "reports",
-    link: "/reports",
-    icon: <FaList />,
-    isDropdown: true,
-    subMenu: [
-      {
-        name: "donation",
-        code: "donation",
-        link: "/donation",
-      },
-    ],
+    name: "recent works",
+    code: "/recent-works",
+    link: "/recent-works",
+    icon: <SiCountingworkspro />,
+  },
+  {
+    name: "testimonials",
+    code: "/testimonials",
+    link: "/testimonial",
+    icon: <FaCommentDots />,
+  },
+  {
+    name: "experience",
+    code: "/experience",
+    link: "/experience",
+    icon: <GiBrain />,
+  },
+  {
+    name: "services",
+    code: "/services",
+    link: "/services",
+    icon: <MdDesignServices />,
   },
   {
     name: "Settings",
@@ -35,34 +55,14 @@ export const developerNavigation = [
     isDropdown: true,
     subMenu: [
       {
-        name: "users",
-        code: "users",
-        link: "/settings/users",
+        name: "My Experience",
+        code: "my-experience",
+        link: "/settings/my-experience",
       },
       {
-        name: "general",
-        code: "general",
-        link: "/settings/general",
-      },
-      {
-        name: "category",
-        code: "category",
-        link: "/settings/category",
-      },
-      {
-        name: "designation",
-        code: "designation",
-        link: "/settings/designation",
-      },
-      {
-        name: "notifications",
-        code: "notifications",
-        link: "/settings/notifications",
-      },
-      {
-        name: "maintenance",
-        code: "maintenance",
-        link: "/settings/maintenance",
+        name: "My Service",
+        code: "my-service",
+        link: "/settings/my-service",
       },
     ],
   },

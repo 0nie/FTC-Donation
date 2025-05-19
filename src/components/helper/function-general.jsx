@@ -1,5 +1,6 @@
-const urlLocal = "http://localhost/react-vite/viter-ftc-donation";
-const urlLocalImg = "http://localhost/react-vite/viter-ftc-donation/public/img";
+const urlLocal = "http://localhost/project-react-vite/viter-ftc-portfolio";
+const urlLocalImg =
+  "http://localhost/project-react-vite/viter-ftc-portfolio/public/img";
 
 // LOCAL DEV
 export const devApiUrl = `${urlLocal}`;

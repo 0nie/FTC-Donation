@@ -73,6 +73,7 @@ const ModalAddSettingsDesignation = ({ itemEdit, setIsModal }) => {
   const initVal = {
     designation_name: itemEdit ? itemEdit.designation_name : "",
     designation_category_id: itemEdit ? itemEdit.designation_category_id : "",
+    designation_name_old: itemEdit ? itemEdit.designation_name : "",
   };
   const yupSchema = Yup.object({
     designation_name: Yup.string().required("required"),

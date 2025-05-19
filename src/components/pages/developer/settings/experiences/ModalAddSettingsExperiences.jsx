@@ -6,17 +6,17 @@ import { Form, Formik } from "formik";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import ModalWrapperSide from "../../../partials/modal/ModalWrapperSide";
-import { InputText, InputTextArea } from "../../../custom-hooks/FormInputs";
-import { queryData } from "../../../helper/queryData";
-import { StoreContext } from "../../../../../store/StoreContext";
 import {
   setError,
   setMessage,
   setSuccess,
-} from "../../../../../store/StoreAction";
+} from "../../../../../../store/StoreAction";
+import ModalWrapperSide from "../../../../partials/modal/ModalWrapperSide";
+import { InputText, InputTextArea } from "../../../../custom-hooks/FormInputs";
+import { queryData } from "../../../../helper/queryData";
+import { StoreContext } from "../../../../../../store/StoreContext";
 
-const ModalAddSettingsChildren = ({ itemEdit, setIsModal }) => {
+const ModalAddSettingsExperience = ({ itemEdit, setIsModal }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("translate-x-full");
 
@@ -25,13 +25,13 @@ const ModalAddSettingsChildren = ({ itemEdit, setIsModal }) => {
     mutationFn: (values) =>
       queryData(
         itemEdit
-          ? `/rest/v1/controllers/developer/children-list/children.php?childrenid=${itemEdit.children_list_aid}`
-          : `/rest/v1/controllers/developer/children-list/children.php`,
+          ? `/rest/v1/controllers/developer/settings/experience/experience.php?experienceid=${itemEdit.experience_aid}`
+          : `/rest/v1/controllers/developer/settings/experience/experience.php`,
         itemEdit ? "PUT" : "POST",
         values
       ),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["children-list"] });
+      queryClient.invalidateQueries({ queryKey: ["experience-list"] });
 
       if (!data.success) {
         dispatch(setMessage(data.error));
@@ -45,24 +45,12 @@ const ModalAddSettingsChildren = ({ itemEdit, setIsModal }) => {
   });
 
   const initVal = {
-    children_list_first_name: itemEdit ? itemEdit.children_list_first_name : "",
-    children_list_last_name: itemEdit ? itemEdit.children_list_last_name : "",
-    children_list_birthdate: itemEdit ? itemEdit.children_list_birthdate : "",
-
-    children_list_donation: itemEdit ? itemEdit.children_list_donation : "",
-    children_list_story: itemEdit ? itemEdit.children_list_story : "",
-    children_list_first_name_old: itemEdit
-      ? itemEdit.children_list_first_name
-      : "",
-    children_list_last_name_old: itemEdit
-      ? itemEdit.children_list_last_name
-      : "",
+    experience_title: itemEdit ? itemEdit.experience_title : "",
+    experience_description: itemEdit ? itemEdit.experience_description : "",
   };
   const yupSchema = Yup.object({
-    children_list_first_name: Yup.string().required("required"),
-    children_list_last_name: Yup.string().required("required"),
-    children_list_birthdate: Yup.string().required("required"),
-    children_list_donation: Yup.string().required("required"),
+    experience_title: Yup.string().required("required"),
+    experience_description: Yup.string().required("required"),
   });
 
   const handleClose = () => {
@@ -80,7 +68,7 @@ const ModalAddSettingsChildren = ({ itemEdit, setIsModal }) => {
     <>
       <ModalWrapperSide handleClose={handleClose} className={`${animate}`}>
         <div className="modal__header">
-          <h3>{itemEdit ? "Update" : "Add"} Children</h3>
+          <h3>{itemEdit ? "Update" : "Add"} Experience</h3>
           <button
             type="button"
             className="absolute top-0 right-0"
@@ -105,42 +93,18 @@ const ModalAddSettingsChildren = ({ itemEdit, setIsModal }) => {
                     <div className="forms">
                       <div className="relative mt-3 mb-5">
                         <InputText
-                          label="Last Name"
+                          label="Title"
                           type="text"
-                          name="children_list_last_name"
+                          name="experience_title"
                           disabled={false}
                         />
                       </div>
-                      <div className="relative mt-3 mb-5">
-                        <InputText
-                          label="First Name"
-                          type="text"
-                          name="children_list_first_name"
-                          disabled={false}
-                        />
-                      </div>
-                      <div className="relative mt-3 mb-5">
-                        <InputText
-                          label="Birthdate"
-                          type="date"
-                          name="children_list_birthdate"
-                          disabled={false}
-                        />
-                      </div>
+
                       <div className="relative mt-3 mb-5">
                         <InputTextArea
-                          label="My Story"
+                          label="Description"
                           type="text"
-                          name="children_list_story"
-                          disabled={false}
-                          required={false}
-                        />
-                      </div>
-                      <div className="relative mt-3 mb-5">
-                        <InputText
-                          label="Donation Amount Limit"
-                          type="number"
-                          name="children_list_donation"
+                          name="experience_description"
                           disabled={false}
                         />
                       </div>
@@ -172,4 +136,4 @@ const ModalAddSettingsChildren = ({ itemEdit, setIsModal }) => {
   );
 };
 
-export default ModalAddSettingsChildren;
+export default ModalAddSettingsExperience;
