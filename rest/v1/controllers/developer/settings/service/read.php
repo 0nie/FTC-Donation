@@ -5,18 +5,18 @@ $conn = null;
 $conn = checkDbConnection();
 
 // make instance of classes or use the model
-$children = new ChildrenList($conn);
+$service = new Service($conn);
 
-if (array_key_exists("childrenid", $_GET)) {
-    $childrenid->children_id = $_GET['childrenid'];
-    checkId($children->children_list_aid);
-    $query = checkReadById($children);
+if (array_key_exists("serviceid", $_GET)) {
+    $serviceid->service_id = $_GET['serviceid'];
+    checkId($service->service_aid);
+    $query = checkReadById($service);
     http_response_code(200);
     getQueriedData($query);
 }
 
 if (empty($_GET)) {
-    $query = checkReadAll($children);
+    $query = checkReadAll($service);
     http_response_code(200);
     getQueriedData($query);
 }

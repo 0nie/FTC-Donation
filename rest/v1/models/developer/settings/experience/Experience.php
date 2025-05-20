@@ -131,6 +131,7 @@ class Experience
             $sql .= "from {$this->tblExperience} ";
             $sql .= "where ";
             $sql .= "experience_title like :experience_title ";
+            $sql .= "or experience_description like :experience_description ";
             $sql .= "order by ";
             $sql .= "experience_is_active desc, ";
             $sql .= "experience_title asc ";
@@ -141,6 +142,7 @@ class Experience
                 // est
                 // test
                 'experience_title' => "%{$this->search}%",
+                'experience_description' => "%{$this->search}%",
 
             ]);
         } catch (PDOException $ex) {
@@ -164,16 +166,16 @@ class Experience
             $sql .= "experience_is_active = :experience_is_active ";
             $sql .= "and ( ";
             $sql .= "experience_title like :experience_title ";
-            $sql .= " ) ";
+            $sql .= "or experience_description like :experience_description ";
+            $sql .= ") ";
             $sql .= "order by ";
             $sql .= "experience_is_active desc, ";
-            $sql .= "experience_title asc, ";
-
+            $sql .= "experience_title asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 'experience_is_active' => $this->experience_is_active,
                 'experience_title' => "%{$this->search}%",
-
+                'experience_description' => "%{$this->search}%",
             ]);
         } catch (PDOException $ex) {
             returnError($ex);
@@ -272,21 +274,26 @@ class Experience
         return $query;
     }
 
+
+
     public function checkTitle()
     {
-        try {
-            $sql = "SELECT experience_aid 
-                FROM {$this->tblExperience}
-                WHERE experience_title = :experience_title";
+        $query = "SELECT * FROM " . $this->tblExperience . " 
+              WHERE experience_title = :experience_title";
 
-            $query = $this->connection->prepare($sql);
-            $query->execute([
-                'experience_title' => $this->experience_title
-            ]);
-
-            return $query->rowCount() > 0;
-        } catch (PDOException $ex) {
-            return false;
+        // Only exclude self in update mode
+        if (!empty($this->experience_aid)) {
+            $query .= " AND experience_aid != :experience_aid";
         }
+
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(":experience_title", $this->experience_title);
+
+        if (!empty($this->experience_aid)) {
+            $stmt->bindParam(":experience_aid", $this->experience_aid);
+        }
+
+        $stmt->execute();
+        return $stmt;
     }
 }

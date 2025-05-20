@@ -1,6 +1,7 @@
 <?php
 
-function checkFilter($object){
+function checkFilter($object)
+{
     $query = $object->filter();
     checkQuery($query, "Mali and models mo (filter)");
     return $query;

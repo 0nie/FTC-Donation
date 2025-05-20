@@ -18,9 +18,13 @@ if (array_key_exists('experienceid', $_GET)) {
     $experience->experience_created = date("Y-m-d H:i:s");
     $experience->experience_updated = date("Y-m-d H:i:s");
 
+    $experience_title_old = checkIndex($data, 'experience_title_old');
+
 
     // VALIDATION
     checkId($experience->experience_aid);
+
+    compareTitle($experience, $experience->experience_title, $experience_title_old);
 
 
     $query = checkUpdate($experience);

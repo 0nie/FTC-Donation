@@ -136,63 +136,63 @@ function checkReadQuery($query, $total_result, $object_total, $object_start)
 function checkCreate($object)
 {
     $query = $object->create();
-    checkQuery($query, "There's a problem with you request. (core create)");
+    checkQuery($query, "MALI ANG MODELS MO. (core create)");
     return $query;
 }
 
 function checkReadAll($object)
 {
     $query = $object->readAll();
-    checkQuery($query, "There's a problem with you request. (core readAll)");
+    checkQuery($query, "MALI ANG MODELS MO. (core readAll)");
     return $query;
 }
 
 function checkReadLimit($object)
 {
     $query = $object->readLimit();
-    checkQuery($query, "There's a problem with you request. (core readLimit)");
+    checkQuery($query, "MALI ANG MODELS MO. (core readLimit)");
     return $query;
 }
 
 function checkSearch($object)
 {
     $query = $object->search();
-    checkQuery($query, "There's a problem with you request. (core search)");
+    checkQuery($query, "MALI ANG MODELS MO. (core search)");
     return $query;
 }
 
 function checkReadById($object)
 {
     $query = $object->readById();
-    checkQuery($query, "There's a problem with you request. (core readById)");
+    checkQuery($query, "MALI ANG MODELS MO. (core readById)");
     return $query;
 }
 
 function checkReadKey($object)
 {
     $query = $object->readKey();
-    checkQuery($query, "There's a problem with you request. (core readKey)");
+    checkQuery($query, "MALI ANG MODELS MO. (core readKey)");
     return $query;
 }
 
 function checkUpdate($object)
 {
     $query = $object->update();
-    checkQuery($query, "There's a problem with you request. (core update)");
+    checkQuery($query, "MALI ANG MODELS MO. (core update)");
     return $query;
 }
 
 function checkDelete($object)
 {
     $query = $object->delete();
-    checkQuery($query, "There's a problem with you request. (core delete)");
+    checkQuery($query, "MALI ANG MODELS MO. (core delete)");
     return $query;
 }
 
 function checkActive($object)
 {
     $query = $object->active();
-    checkQuery($query, "There's a problem with you request. (core active)");
+    checkQuery($query, "MALI ANG MODELS MO. (core active)");
     return $query;
 }
 
@@ -243,14 +243,15 @@ function sendResponse($result)
     $response->send();
 }
 
-function checkEndpoint()
+function checkEndPoint()
 {
+
     $response = new Response();
     $error = [];
     $response->setSuccess(false);
-    $error['code'] = '404';
-    $error['error'] = 'Method not found.';
+    $error['code'] = "404";
     $error['success'] = false;
+    $error['error'] = "Method Not Found.";
     $response->setData($error);
     $response->send();
     exit;
@@ -270,28 +271,44 @@ function checkExistence($count, $msg = '')
     }
 }
 
-function isNameExist($object, $name)
+function isTitleExist($object, $title)
 {
-    $query = $object->checkName();
+    $query = $object->checkTitle();
     $count = $query->rowCount();
-    checkExistence($count, "{$name} already exist");
+    checkExistence($count, "{$title} title already exists.");
 }
 
-function compareName(
-    $object, // MODELS || parameter 1
-    $new_name, // pass the new name || parameter 2 
-    $old_name // pass the old name || parameter 3
+function compareTitle(
+    $object,
+    $new_title,
+    $old_title
 ) {
-    if (strtolower($new_name) != strtolower($old_name)) {
-        isNameExist($object, $new_name);
+    if (strtolower($new_title) != strtolower($old_title)) {
+        isTitleExist($object, $new_title);
     }
 }
 
+function isEmailExist($object, $email)
+{
+    $query = $object->checkEmail();
+    $count = $query->rowCount();
+    checkExistence($count, "{$email} email already exists.");
+}
+
+function compareEmail(
+    $object,
+    $new_email,
+    $old_email
+) {
+    if (strtolower($new_email) != strtolower($old_email)) {
+        isEmailExist($object, $new_email);
+    }
+}
 
 
 function isAssociated($object)
 {
     $query = $object->checkAssociation();
     $count = $query->rowCount();
-    checkExistence($count, "You cannot delete this item because it is already associated with another module.");
+    checkExistence($count, "You cannot delete this item because it is already associated with another module");
 }

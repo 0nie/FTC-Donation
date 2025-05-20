@@ -19,16 +19,13 @@ $experience->experience_title = checkIndex($data, 'experience_title');
 $experience->experience_description = checkIndex($data, 'experience_description');
 
 
-
-
-
-
-
-
 // Set timestamps and status
 $experience->experience_is_active = 1;
 $experience->experience_created = date("Y-m-d H:i:s");
 $experience->experience_updated = date("Y-m-d H:i:s");
+
+isTitleExist($experience, $experience->experience_title);
+
 
 // Call create function
 $query = checkCreate($experience);
