@@ -312,3 +312,10 @@ function isAssociated($object)
     $count = $query->rowCount();
     checkExistence($count, "You cannot delete this item because it is already associated with another module");
 }
+
+function isFullNameExist($object, $first_name, $last_name)
+{
+    $query = $object->checkFullName();
+    $count = $query->rowCount();
+    checkExistence($count, "{$first_name} {$last_name} full name already exists.");
+}

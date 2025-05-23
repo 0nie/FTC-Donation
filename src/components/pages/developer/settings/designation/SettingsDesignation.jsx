@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../../../partials/Header";
-import Navigation from "../Navigation";
+import Navigation from "../../Navigation";
 import Footer from "../../../../partials/Footer"; // Make sure capitalization matches your actual file
 import BreadCrumbs from "../../../../partials/BreadCrumbs";
 import { FaPlus } from "react-icons/fa";

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { developerNavigation } from "../../../helper/developer-navigation";
+import { developerNavigation } from "../../helper/developer-navigation";
 import { PiCaretDown } from "react-icons/pi";
 
 const Navigation = ({ menu = "", subMenu = "" }) => {

@@ -33,7 +33,7 @@ export const developerNavigation = [
   {
     name: "testimonials",
     code: "/testimonials",
-    link: "/testimonial",
+    link: "/testimonials",
     icon: <FaCommentDots />,
   },
   {

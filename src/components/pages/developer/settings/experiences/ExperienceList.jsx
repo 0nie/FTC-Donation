@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa";
 
 import * as Yup from "yup";
 import Header from "../../../../partials/Header";
-import Navigation from "../Navigation";
+import Navigation from "../../Navigation";
 
 import Footer from "../../../../partials/Footer";
 import ExperienceListTable from "./ExperiencesListTable";

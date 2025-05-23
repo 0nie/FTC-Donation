@@ -5,6 +5,7 @@ require '../../../../core/header.php';
 require '../../../../core/functions.php';
 // use model
 require '../../../../models/developer/settings/experience/Experience.php';
+require './function.php';
 
 // check database connection
 $conn = null;
