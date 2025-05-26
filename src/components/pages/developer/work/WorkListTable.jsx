@@ -2,6 +2,7 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 import { FaArchive, FaEdit, FaHistory, FaList, FaTrash } from "react-icons/fa";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 // import {
 //   setIsSearch,
@@ -165,7 +166,7 @@ const WorkListTable = ({ setItemEdit, setIsModal }) => {
               <th className="w-[1rem] text-center">#</th>
               <th className="w-[2rem]">Status</th>
               <th className="w-[20rem]">Title</th>
-              <th className="w-[20rem]">Description</th>
+              <th className="w-[20rem]">URL Github Link</th>
 
               <th colSpan="100%"></th>
             </tr>
@@ -205,7 +206,18 @@ const WorkListTable = ({ setItemEdit, setIsModal }) => {
                         )}
                       </td>
                       <td>{item.work_title}</td>
-                      <td>{item.work_description}</td>
+                      <td>
+                        <a
+                          href={`https://github.com/dummyuser/${item.work_title
+                            .replace(/\s+/g, "-")
+                            .toLowerCase()}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline"
+                        >
+                          {item.work_description}
+                        </a>
+                      </td>
                       <td colSpan="100%">
                         {item.work_is_active == 1 ? (
                           <div className="flex gap-x-3 items-center justify-end mr-2">

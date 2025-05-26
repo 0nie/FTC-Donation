@@ -13,9 +13,9 @@ import { SiAboutdotme, SiCountingworkspro } from "react-icons/si";
 
 export const developerNavigation = [
   {
-    name: "dash board",
+    name: "dashboard",
     code: "dash-board",
-    link: "/dash-board",
+    link: "/dashboard",
     icon: <MdSpaceDashboard />,
   },
   {

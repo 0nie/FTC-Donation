@@ -172,7 +172,7 @@ const TestimonialsListTable = ({ setItemEdit, setIsModal }) => {
               <th className="w-[3rem]">Status</th>
               <th className="w-[15rem]">Name</th>
               <th className="w-[20rem]">Email</th>
-              <th className="w-[20rem]">Description</th>
+              <th className="w-[40rem]">Description</th>
 
               <th colSpan="100%"></th>
             </tr>

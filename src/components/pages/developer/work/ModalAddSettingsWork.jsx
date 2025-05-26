@@ -103,7 +103,7 @@ const ModalAddSettingsWork = ({ itemEdit, setIsModal }) => {
 
                       <div className="relative mt-3 mb-5">
                         <InputTextArea
-                          label="Description"
+                          label="URL Github Link"
                           type="text"
                           name="work_description"
                           disabled={false}

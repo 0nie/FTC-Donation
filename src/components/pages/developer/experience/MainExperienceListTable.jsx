@@ -40,7 +40,12 @@ const MainExperienceListTable = ({ setItemEdit, setIsModal }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["mainexperience", search.current.value, store.isSearch, isActive],
+    queryKey: [
+      "mainexperience",
+      search.current.value,
+      store.isSearch,
+      isActive,
+    ],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
         `/rest/v1/controllers/developer/experience/search.php`, // url search
@@ -160,7 +165,7 @@ const MainExperienceListTable = ({ setItemEdit, setIsModal }) => {
               <th className="w-[2rem]">Status</th>
               <th className="w-[15rem]">Title</th>
               <th className="w-[20rem]">Experience Category</th>
-              <th className="w-[20rem]">Description</th>
+              <th className="w-[40rem]">Description</th>
 
               <th colSpan="100%"></th>
             </tr>

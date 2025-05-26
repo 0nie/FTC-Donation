@@ -160,7 +160,7 @@ const ServiceListTable = ({ setItemEdit, setIsModal }) => {
               <th className="w-[1rem] text-center">#</th>
               <th className="w-[2rem]">Status</th>
               <th className="w-[20rem]">Title</th>
-              <th className="w-[20rem]">Description</th>
+              <th className="w-[40rem]">Description</th>
 
               <th colSpan="100%"></th>
             </tr>

@@ -16,7 +16,7 @@ const Header = () => {
         </div>
 
         <div>
-          <div className="rounded-full bg-[#3E9BD0]  flex items-center justify-center min-h-[2rem] h-[2rem] max-w-[2rem] w-[2rem] pt-px text-white">
+          <div className="rounded-full bg-[#494947]  flex items-center justify-center min-h-[2rem] h-[2rem] max-w-[2rem] w-[2rem] pt-px text-white">
             <span className="block">R</span>
             <span className="block">V</span>
           </div>

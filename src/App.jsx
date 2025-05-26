@@ -14,6 +14,7 @@ import MainExperienceList from "./components/pages/developer/experience/MainExpe
 import WorkList from "./components/pages/developer/work/WorkList";
 import AboutList from "./components/pages/developer/about/AboutList";
 import TestimonialsList from "./components/pages/developer/testimonials/TestimonialsList";
+import DashboardList from "./components/pages/developer/dashboard/DashboardList";
 
 function App() {
   const queryClient = new QueryClient();
@@ -32,6 +33,9 @@ function App() {
                   </div>
                 }
               />
+
+              <Route path="/" element={<DashboardList />} />
+              <Route path="/dashboard" element={<DashboardList />} />
               <Route path="/about" element={<AboutList />} />
               <Route path="/recent-works" element={<WorkList />} />
               <Route path="/testimonials" element={<TestimonialsList />} />
